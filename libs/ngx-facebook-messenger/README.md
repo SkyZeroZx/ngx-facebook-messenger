@@ -49,11 +49,49 @@ import { NgxFacebookMessengerModule } from 'ngx-facebook-messenger';
 export class AppModule { }
 ```
 
+## Customization CSS
+
+For customized position of plugin and background
+
+In case the View Button is **ICON**
+
+Example of position left in the plugin with botton 36px , and custom background color
+
+```scss
+#ngx-facebook-messenger {
+  .wrapper {
+    bottom: 36px;
+    right: 0px;
+    left: 12px;
+    background: #8278ff;
+  }
+}
+```
+
+In case the View Button is **ICON TEXT** or **TEXT**
+
+Example of position left in the plugin with bottom 36px , and custom background
+
+```scss
+#ngx-facebook-messenger {
+  .wrapper {
+    bottom: 36px;
+    right: 0;
+    left: 0;
+  }
+
+  .wrapper-icon-text {
+    left: 12px;
+    background: #8278ff;
+  }
+}
+```
+
 # API
 
 # Inputs
 
-- In **fbInitParams**
+In **fbInitParams**
 
 ```typescript
 interface InitParams {
@@ -70,37 +108,63 @@ interface InitParams {
 
 - Credits of Facebook General Interface type for [facebook-js-sdk](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/facebook-js-sdk/index.d.ts)
 
-- In **NgxFacebookMessengerOptions**
+In **NgxFacebookMessengerOptions**
 
 ```typescript
 export interface NgxFacebookMessengerOptions {
-  /*Your required Page Id for correctly work of real plugin facebook messenger*/
+  /**
+   * Your required page_id for correctly work of real plugin facebook messenger
+   */
   page_id: string;
- 
- /*Init Plugin Options if required showCustomerChat and showDialog*/
+  /**
+   *  Init Plugin Options
+   */
   initPluginOptions?: {
-    showCustomerChat?: boolean;
+    /**
+     * If required showDialog
+     * @default true
+     */
     showDialog?: boolean;
+    /**
+     * Debounce time for hide the ngx facebook messenger
+     * When load real plugin, time in miliseconds
+     * @default 600
+     */
+    debounceTime?: number;
   };
-
-  /*Button Options for customization similar to a Facebook Plugin Official*/
+  /**
+   * Button Options for customization similar to a Facebook Plugin Official
+   */
   buttonOptions?: {
-
-    /*Your Custom Text only visible when view is ICON_TEXT or TEXT*/
-    text?: string; // Default is Chat
-
-    /*Enum Options of possible view how ICON , ICON_TEXT or TEXT */
-    view?: VIEW_BUTTON; // Default value ICON
-
-    /*Enum Options of possible styles button how ROUNDED_LOGO , ROUNDED and SQUARED*/
-    style?: STYLE_BUTTON; // Default value ROUNDED_LOGO
-
-    /*Possible options of size how standard or compact similar to a Facebook Plugin Official*/
+    /**
+     * Text button when style is VIEW_BUTTON.ICON_TEXT or VIEW_BUTTON.TEXT
+     * @default Chat
+     */
+    text?: string;
+    /**
+     * Enum Options of possible view.
+     * @default VIEW_BUTTON.ICON
+     */
+    view?: VIEW_BUTTON;
+    /**
+     * Enum Options of possible style.
+     * @default STYLE_BUTTON.ROUNDED_LOGO
+     */
+    style?: STYLE_BUTTON;
+    /**
+     * Size options if is desktop or mobile
+     */
     size?: {
-      
-      /*Enums with options STANDARD or COMPACT*/
-      desktop?: SIZE_BUTTON_DESKTOP; // Default value STANDARD
-      mobile?: SIZE_BUTTON_MOBILE; // Default value COMPACT
+      /**
+       * Enum Options of possible desktop size.
+       * @default SIZE_BUTTON_DESKTOP.STANDARD
+       */
+      desktop?: SIZE_BUTTON_DESKTOP;
+      /**
+       * Enum Options of possible mobile size.
+       * @default SIZE_BUTTON_MOBILE.COMPACT
+       */
+      mobile?: SIZE_BUTTON_MOBILE;
     };
   };
 }
@@ -145,17 +209,31 @@ export enum SIZE_BUTTON_DESKTOP {
 
 # Methods
 
-This method should be after init the plugin or throw a error
+This method should be after init the plugin or throw a error , except **hideNgxFacebookMessenger**
 
 | Method                                    | Description                                                                                                                                                                                                                                                                                                                            |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pluginChatShow(shouldShowDialog: boolean) | Call this function to show the plugin on your page. You can use the shouldShowDialog parameter to decide if the dialog should also be shown. For the plugin to stay hidden on initial page load, you have to set xfbml as false when initializing the SDK. Then you can call FB.XFBML.parse() to control when Customer Chat is loaded. |
-| pluginChatShowDialog                      | Call this function to show the plugin dialog.                                                                                                                                                                                                                                                                                          |
+| pluginChatShowDialog()                    | Call this function to show the plugin dialog.                                                                                                                                                                                                                                                                                          |
 | pluginChatHideDialog()                    | Call this function to hide the plugin dialog.                                                                                                                                                                                                                                                                                          |
 | pluginChatHide()                          | Call this function to hide the plugin Chat.                                                                                                                                                                                                                                                                                            |
 | fbXFBMLParse()                            | This function parses and renders XFBML markup in a document on the fly. This could be used if you send XFBML from your server via ajax and want to render it client side. XFBML enables you to incorporate FBML into your websites and IFrame applications.                                                                            |
+| hideNgxFacebookMessenger()                | This function hide the library with display none with a debounce time if exist in the _options_                                                                                                                                                                                                                                        |
 
 Note :
 The documentation take part of facebook js sdk
 
 - https://developers.facebook.com/docs/reference/javascript
+
+## Versioning
+
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/zyra/ngx-facebook/tags).
+
+## Contribution
+
+- **Having an issue**? or looking for support? [Open an issue](https://github.com/SkyZeroZx/ngx-facebook-messenger) and we will get you the help you need.
+- Got a **new feature or a bug fix**? Fork the repository, make your changes, and submit a pull request.
+
+## Support this project
+
+If you find this project useful, please star the repository to let people know that it's reliable. Also, share it with friends and colleagues that might find this useful as well. Thank you :smile:
