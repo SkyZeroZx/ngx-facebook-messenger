@@ -22,10 +22,10 @@ export class AppComponent {
   listEvents: string[] = [];
 
   options: NgxFacebookMessengerOptions = {
-    page_id: '110145950848846',
+    page_id: '138655492654061',
     initPluginOptions: {
-      showDialog : true,
-      debounceTime : 500,
+      showDialog: true,
+      debounceTime: 500,
     },
     buttonOptions: {
       text: this.inputText,
