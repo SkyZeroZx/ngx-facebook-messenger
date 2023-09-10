@@ -1,0 +1,56 @@
+{
+  "name": "ngx-facebook-messenger",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ngx-facebook-messenger/src",
+  "prefix": "facebook-messenger",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/ngx-facebook-messenger/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ngx-facebook-messenger/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/ngx-facebook-messenger/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ngx-facebook-messenger/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/ngx-facebook-messenger/**/*.ts",
+          "libs/ngx-facebook-messenger/**/*.html"
+        ]
+      }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "ngx-facebook-messenger"
+      }
+    }
+  }
+}

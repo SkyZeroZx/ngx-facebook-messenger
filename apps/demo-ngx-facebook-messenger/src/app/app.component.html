@@ -1,0 +1,190 @@
+<main class="pt-24 flex items-center justify-center">
+  <div class="md:max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div>
+      <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl text-center">
+        Ngx Facebook Messenger
+      </h1>
+      <p class="mt-5 text-xl text-gray-500 text-center">
+        Awesome Angular Library Facebook Messenger
+      </p>
+      <ng-container *ngTemplateOutlet="stylesOptions"></ng-container>
+      <ng-container *ngTemplateOutlet="APIOptions"></ng-container>
+    </div>
+  </div>
+</main>
+<ngx-facebook-messenger
+  [fbInitParams]="{ xfbml: true, version: 'v17.0' }"
+  [ngxFacebookMessengerOptions]="options"
+  (xfbmlRender)="pushEvent('xfbmlRender')"
+  (customerChatHide)="pushEvent('customerChatHide')"
+  (customerChatLoad)="pushEvent('customerChatLoad')"
+  (customerChatShow)="pushEvent('customerChatShow')"
+  (dialogShow)="pushEvent('dialogShow')"
+  (dialogHide)="pushEvent('dialogHide')"
+>
+</ngx-facebook-messenger>
+<ng-template #stylesOptions>
+  <div class="mt-10 w-full">
+    <h2 class="text-2xl font-bold text-gray-600 mb-8 md:ml-0 ml-4">Styles</h2>
+    <div class="grid grid-cols-5 grid-rows-5 gap-4 md:p-1 p-4">
+      <div>
+        <label class="text-gray-600 font-semibold">Size Desktop:</label>
+      </div>
+      <div class="col-start-1 row-start-2">
+        <label class="text-gray-600 font-semibold">Size Mobile:</label>
+      </div>
+      <div class="col-start-1 row-start-3">
+        <label class="text-gray-600 font-semibold">View Button:</label>
+      </div>
+      <div class="col-start-1 row-start-4">
+        <label class="text-gray-600 font-semibold">Style Button:</label>
+      </div>
+      <div class="col-start-2 row-start-1">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="standardDesktop()"
+        >
+          Standard
+        </button>
+      </div>
+      <div class="col-start-3 row-start-1">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="compactDesktop()"
+        >
+          Compact
+        </button>
+      </div>
+      <div class="col-start-2 row-start-2">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="standardMobile()"
+        >
+          Standard
+        </button>
+      </div>
+      <div class="col-start-3 row-start-2">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="compactMobile()"
+        >
+          Compact
+        </button>
+      </div>
+      <div class="col-start-2 row-start-3">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="viewButtonIcon()"
+        >
+          Icon
+        </button>
+      </div>
+      <div class="col-start-3 row-start-3">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="viewButtonIconText()"
+        >
+          Icon Text
+        </button>
+      </div>
+      <div class="col-start-2 row-start-4">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="styleButtonRounded()"
+        >
+          Rounded
+        </button>
+      </div>
+      <div class="col-start-3 row-start-4">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="styleButtonSquared()"
+        >
+          Squared
+        </button>
+      </div>
+      <div class="col-start-4 row-start-3">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="viewButtonText()"
+        >
+          Text
+        </button>
+      </div>
+      <div class="row-start-4">
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="styleButtonRoundedLogo()"
+        >
+          Rounded_Logo
+        </button>
+      </div>
+      <div class="col-start-1 row-start-5">
+        <label class="text-gray-600 font-semibold">Button Text :</label>
+      </div>
+      <div class="col-start-2 row-start-5">
+        <input
+          [value]="inputText"
+          (input)="onChangeText($event)"
+          placeholder="Your Button Text"
+          type="text"
+          role="custom text"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+    </div>
+
+    <div class="p-3 mt-6 text-gray-700 max-sm:text-lg">
+      Configuration <strong>ngxFacebookMessengerOptions</strong>
+      <pre class="type-wrap"> {{ options | json }} </pre>
+    </div>
+
+    <div class="flex flex-nowrap space-x-2 justify-center">
+      <div>
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="pluginChatShow()"
+        >
+          Chat Show
+        </button>
+      </div>
+      <div>
+        <button
+          class="px-3 py-2 bg-indigo-500 text-white rounded"
+          (click)="pluginDialogShow()"
+        >
+          Dialog Show
+        </button>
+      </div>
+
+      <div>
+        <button
+          class="px-3 py-2 bg-gray-500 text-white rounded"
+          (click)="pluginChatHide()"
+        >
+          Chat Hide
+        </button>
+      </div>
+      <div>
+        <button
+          class="px-3 py-2 bg-gray-500 text-white rounded"
+          (click)="pluginDialogHide()"
+        >
+          Dialog Hide
+        </button>
+      </div>
+    </div>
+
+    <div class="p-3 mt-6 text-gray-700 max-sm:text-lg">
+      Events :
+      <pre class="type-wrap">{{ listEvents.join('\r\n') }}</pre>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #APIOptions>
+  <div class="mt-10 w-full">
+    <h2 class="text-2xl font-bold text-gray-600 mb-8 md:ml-0 ml-4">API</h2>
+    <ngx-facebook-messenger-documentation></ngx-facebook-messenger-documentation>
+  </div>
+</ng-template>

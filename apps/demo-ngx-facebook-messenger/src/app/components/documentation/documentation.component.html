@@ -1,0 +1,197 @@
+<section class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Inputs</h1>
+
+    <br />
+
+    <p>In <strong>fbInitParams</strong></p>
+
+    <pre class="type-wrap">
+      interface InitParams &#123;
+              appId?: string;
+              version: string;
+              cookie?: boolean;
+              status?: boolean;
+              xfbml?: boolean; // Default value true
+              frictionlessRequests?: boolean;
+              hideFlashCallback?: boolean;
+              autoLogAppEvents?: boolean;
+           &#125;
+    </pre>
+
+    <br />
+
+    <p>In <strong>ngxFacebookMessengerOptions</strong></p>
+    <pre class="type-wrap">
+        export interface NgxFacebookMessengerOptions &#123;
+          /**
+          * Your required page_id 
+          * For correctly work of real plugin facebook messenger
+          */
+          page_id: string;
+          /**
+          *  Init Plugin Options
+          */
+          initPluginOptions?: &#123;
+            /**
+            * If required showDialog
+            * @default true
+            */
+            showDialog?: boolean;
+            /**
+            * Debounce time for hide the ngx facebook messenger
+            * When load real plugin, time in miliseconds
+            * @default 600
+            */
+            debounceTime?: number;
+          &#125;;
+          /**
+          * Button Options for customization
+          * similar to a Facebook Plugin Official
+          */
+          buttonOptions?: &#123;
+            /**
+            * Text button when style
+            * VIEW_BUTTON.ICON_TEXT or VIEW_BUTTON.TEXT
+            * @default Chat
+            */
+            text?: string;
+            /**
+            * Enum Options of possible view.
+            * @default VIEW_BUTTON.ICON
+            */
+            view?: VIEW_BUTTON;
+            /**
+            * Enum Options of possible style.
+            * @default STYLE_BUTTON.ROUNDED_LOGO
+            */
+            style?: STYLE_BUTTON;
+            /**
+            * Size options if is desktop or mobile
+            */
+            size?: &#123;
+              /**
+              * Enum Options of possible desktop size.
+              * @default SIZE_BUTTON_DESKTOP.STANDARD
+              */
+              desktop?: SIZE_BUTTON_DESKTOP;
+              /**
+              * Enum Options of possible mobile size.
+              * @default SIZE_BUTTON_MOBILE.COMPACT
+              */
+              mobile?: SIZE_BUTTON_MOBILE;
+            &#125;;
+          &#125;;
+        &#125;
+    </pre>
+
+    <h1 class="text-2xl font-bold mb-4">Ouput</h1>
+    <table class="table-auto w-full bg-[#f0f0f0] shadow-md rounded-lg">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 bg-gray-200">Output</th>
+          <th class="px-4 py-2 bg-gray-200">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="px-4 py-2">xfbmlRender</td>
+          <td class="px-4 py-2">Emitted when xfmblRender in the DOM.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">customerChatShow</td>
+          <td class="px-4 py-2">
+            Emitted when the customer Chat Show ( Oficial PLugin Facebook )
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">customerChatLoad</td>
+          <td class="px-4 py-2">
+            Emitted when the customer Load , At this point, the plugin is not
+            necessarily mounted in the DOM( Oficial PLugin Facebook )
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">customerChatHide</td>
+          <td class="px-4 py-2">
+            Emitted when the customer chat Hide ( Oficial Plugin Facebook )
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">dialogShow</td>
+          <td class="px-4 py-2">
+            Emitted when the customer chat show Dialog ( Oficial Plugin Facebook
+            )
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">dialogHide</td>
+          <td class="px-4 py-2">
+            Emitted when the customer chat hide Dialog ( Oficial Plugin Facebook
+            )
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+    <h1 class="text-2xl font-bold mb-4">Methods</h1>
+    <p>
+      This method should be after init the plugin or throw a error , except
+      <strong>hideNgxFacebookMessenger</strong>
+    </p>
+    <br />
+    <table class="table-auto w-full bg-[#f0f0f0] shadow-md rounded-lg">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 bg-gray-200">Method</th>
+          <th class="px-4 py-2 bg-gray-200">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="px-4 py-2">pluginChatShow(shouldShowDialog: boolean)</td>
+          <td class="px-4 py-2">
+            Call this function to show the plugin on your page. You can use the
+            shouldShowDialog parameter to decide if the dialog should also be
+            shown. For the plugin to stay hidden on initial page load, you have
+            to set xfbml as false when initializing the SDK. Then you can call
+            FB.XFBML.parse() to control when Customer Chat is loaded..
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">pluginChatShowDialog()</td>
+          <td class="px-4 py-2">
+            Call this function to show the plugin dialog.
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">pluginChatHideDialog()</td>
+          <td class="px-4 py-2">
+            Call this function to hide the plugin dialog.
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">pluginChatHide()</td>
+          <td class="px-4 py-2">Call this function to hide the plugin Chat.</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">fbXFBMLParse()</td>
+          <td class="px-4 py-2">
+            This function parses and renders XFBML markup in a document on the
+            fly. This could be used if you send XFBML from your server via ajax
+            and want to render it client side. XFBML enables you to incorporate
+            FBML into your websites and IFrame applications.
+          </td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2">hideNgxFacebookMessenger()</td>
+          <td class="px-4 py-2">
+            This function hide the library with display none with a debounce
+            time if exist in the options
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,33 @@
+{
+  "name": "demo-ngx-facebook-messenger-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/demo-ngx-facebook-messenger-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/demo-ngx-facebook-messenger-e2e/cypress.config.ts",
+        "devServerTarget": "demo-ngx-facebook-messenger:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "demo-ngx-facebook-messenger:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "demo-ngx-facebook-messenger:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/demo-ngx-facebook-messenger-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["demo-ngx-facebook-messenger"]
+}
