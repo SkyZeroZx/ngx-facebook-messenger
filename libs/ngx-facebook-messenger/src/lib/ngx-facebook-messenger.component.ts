@@ -22,6 +22,10 @@ import {
   VIEW_BUTTON,
 } from './constant';
 import { NgxFacebookMessengerOptions } from './types';
+import { FacebookStatic, InitParams } from './types/facebook.interface';
+
+// eslint-disable-next-line no-var
+var FB: FacebookStatic; // Asign a global variable interface of FacebookStatic
 
 @Component({
   selector: 'ngx-facebook-messenger',
@@ -31,7 +35,7 @@ import { NgxFacebookMessengerOptions } from './types';
 })
 export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
   @Input()
-  fbInitParams!: fb.InitParams;
+  fbInitParams!: InitParams;
 
   @Input()
   ngxFacebookMessengerOptions!: NgxFacebookMessengerOptions;
@@ -186,7 +190,7 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    * events.
    */
   private fbAsyncInit() {
-    window.fbAsyncInit = () => {
+    (window as any)['fbAsyncInit'] = () => {
       const xfbml = this.fbInitParams.xfbml || true;
       const initParams = { ...this.fbInitParams, xfbml };
       FB.init(initParams);
@@ -198,9 +202,12 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    * The function `fbEventSubscribe` subscribes to various Facebook events and emits corresponding events
    */
   private fbEventSubscribe() {
-    FB.Event.subscribe('xfbml.render', () => {
-      this.xfbmlRender.emit();
-    });
+   FB.Event.subscribe(
+      'xfbml.render',
+      () => {
+        this.xfbmlRender.emit();
+      }
+    );
 
     FB.Event.subscribe(CUSTOMER_CHAT.SHOW, () => {
       this.customerChatShow.emit();

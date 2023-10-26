@@ -1,88 +1,123 @@
-<button #ngxFacebookMessenger id="ngx-facebook-messenger" alt="Facebook Messenger Chat"  (click)="loadPlugin()">
-	<div [class]="classButton">
-		<div class="centered-container">
-			<ng-container *ngIf="viewButton === 'ICON_TEXT' || viewButton === 'TEXT'">
-				<ng-container *ngTemplateOutlet="iconText"> </ng-container>
-			</ng-container>
+<div
+  #ngxFacebookMessenger
+  [class]="classButton"
+  id="ngx-facebook-messenger"
+  alt="Facebook Messenger Chat"
+  (click)="loadPlugin()"
+  role="button"
+>
+  <div class="centered-container">
+    <ng-container *ngIf="viewButton === 'ICON_TEXT' || viewButton === 'TEXT'">
+      <ng-container *ngTemplateOutlet="iconText"> </ng-container>
+    </ng-container>
 
-			<ng-container *ngIf="viewButton === 'ICON'">
-				<ng-container *ngTemplateOutlet="icon"> </ng-container>
-			</ng-container>
-		</div>
-	</div>
-</button>
+    <ng-container *ngIf="viewButton === 'ICON'">
+      <ng-container *ngTemplateOutlet="icon"> </ng-container>
+    </ng-container>
+  </div>
+</div>
 
 <ng-template #loading>
-	<svg class="spinning" x="0" y="0" width="36" height="36" viewBox="0 0 60 60">
-		<circle class="path" cx="30" cy="30" r="24" fill="none" stroke-width="6"></circle>
-	</svg>
+  <svg class="spinning" x="0" y="0" width="36" height="36" viewBox="0 0 60 60">
+    <circle
+      class="path"
+      cx="30"
+      cy="30"
+      r="24"
+      fill="none"
+      stroke-width="6"
+    ></circle>
+  </svg>
 </ng-template>
 
 <ng-template #icon>
-	<ng-container *ngIf="!isLoaded; else loading">
-		<svg class="roundedLogo" width="36" height="36" viewBox="0 0 36 36">
-			<path
-				fill="white"
-				d="M1 17.99C1 8.51488 8.42339 1.5 18 1.5C27.5766 1.5 35 8.51488 35 17.99C35 27.4651 27.5766 34.48 18 34.48C16.2799 34.48 14.6296 34.2528 13.079 33.8264C12.7776 33.7435 12.4571 33.767 12.171 33.8933L8.79679 35.3828C7.91415 35.7724 6.91779 35.1446 6.88821 34.1803L6.79564 31.156C6.78425 30.7836 6.61663 30.4352 6.33893 30.1868C3.03116 27.2287 1 22.9461 1 17.99ZM12.7854 14.8897L7.79161 22.8124C7.31238 23.5727 8.24695 24.4295 8.96291 23.8862L14.327 19.8152C14.6899 19.5398 15.1913 19.5384 15.5557 19.8116L19.5276 22.7905C20.7193 23.6845 22.4204 23.3706 23.2148 22.1103L28.2085 14.1875C28.6877 13.4272 27.7531 12.5704 27.0371 13.1137L21.673 17.1847C21.3102 17.4601 20.8088 17.4616 20.4444 17.1882L16.4726 14.2094C15.2807 13.3155 13.5797 13.6293 12.7854 14.8897Z"
-			></path>
-		</svg>
-		<svg class="rounded" width="36" height="36" viewBox="0 0 36 36" fill="none">
-			<path
-				fill-rule="evenodd"
-				clip-rule="evenodd"
-				d="M34.5 17.2554C34.4986 26.4098 27.5895 33.1113 17.9997 33.1113C16.4018 33.1113 14.8796 32.9689 13.4516 32.6202C12.2642 32.3306 11.0245 32.3602 9.86671 32.755L4.3643 34.4437C3.47806 34.7463 2.61794 33.8851 2.9184 32.9648L4.01091 29.3489C4.42 28.095 4.26117 26.7193 3.57432 25.5988C2.12085 23.2265 1.50069 20.3926 1.5 17.2554V17.254V17.2526C1.50138 8.09894 8.41049 1.50537 17.9997 1.50537C27.5895 1.50537 34.4986 8.09894 34.5 17.2526V17.254V17.2554Z"
-				fill="white"
-			></path>
-		</svg>
-		<svg class="squared" width="36" height="36" viewBox="0 0 36 36" fill="none">
-			<path
-				fill-rule="evenodd"
-				clip-rule="evenodd"
-				d="M2 9C2 5.68629 4.68629 3 7.49927 3H27.9993C31.313 3 33.9993 5.68629 33.9993 9V24C33.9993 27.3137 31.313 30 27.9993 30H20.4845C18.8932 30 17.3671 30.6321 16.2419 31.7574L12.6206 35.3787C12.2228 35.7765 11.6832 36 11.1206 36C9.94902 36 8.99927 35.0503 8.99927 33.8787V31.5C8.99927 30.6716 8.3277 30 7.49927 30C4.18556 30 2 27.3137 2 24V9Z"
-				fill="white"
-			></path>
-		</svg>
-	</ng-container>
+  <ng-container *ngIf="!isLoaded; else loading">
+    <svg class="roundedLogo" width="36" height="36" viewBox="0 0 36 36">
+      <path
+        fill="white"
+        d="M1 17.99C1 8.51488 8.42339 1.5 18 1.5C27.5766 1.5 35 8.51488 35 17.99C35 27.4651 27.5766 34.48 18 34.48C16.2799 34.48 14.6296 34.2528 13.079 33.8264C12.7776 33.7435 12.4571 33.767 12.171 33.8933L8.79679 35.3828C7.91415 35.7724 6.91779 35.1446 6.88821 34.1803L6.79564 31.156C6.78425 30.7836 6.61663 30.4352 6.33893 30.1868C3.03116 27.2287 1 22.9461 1 17.99ZM12.7854 14.8897L7.79161 22.8124C7.31238 23.5727 8.24695 24.4295 8.96291 23.8862L14.327 19.8152C14.6899 19.5398 15.1913 19.5384 15.5557 19.8116L19.5276 22.7905C20.7193 23.6845 22.4204 23.3706 23.2148 22.1103L28.2085 14.1875C28.6877 13.4272 27.7531 12.5704 27.0371 13.1137L21.673 17.1847C21.3102 17.4601 20.8088 17.4616 20.4444 17.1882L16.4726 14.2094C15.2807 13.3155 13.5797 13.6293 12.7854 14.8897Z"
+      ></path>
+    </svg>
+    <svg class="rounded" width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M34.5 17.2554C34.4986 26.4098 27.5895 33.1113 17.9997 33.1113C16.4018 33.1113 14.8796 32.9689 13.4516 32.6202C12.2642 32.3306 11.0245 32.3602 9.86671 32.755L4.3643 34.4437C3.47806 34.7463 2.61794 33.8851 2.9184 32.9648L4.01091 29.3489C4.42 28.095 4.26117 26.7193 3.57432 25.5988C2.12085 23.2265 1.50069 20.3926 1.5 17.2554V17.254V17.2526C1.50138 8.09894 8.41049 1.50537 17.9997 1.50537C27.5895 1.50537 34.4986 8.09894 34.5 17.2526V17.254V17.2554Z"
+        fill="white"
+      ></path>
+    </svg>
+    <svg class="squared" width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M2 9C2 5.68629 4.68629 3 7.49927 3H27.9993C31.313 3 33.9993 5.68629 33.9993 9V24C33.9993 27.3137 31.313 30 27.9993 30H20.4845C18.8932 30 17.3671 30.6321 16.2419 31.7574L12.6206 35.3787C12.2228 35.7765 11.6832 36 11.1206 36C9.94902 36 8.99927 35.0503 8.99927 33.8787V31.5C8.99927 30.6716 8.3277 30 7.49927 30C4.18556 30 2 27.3137 2 24V9Z"
+        fill="white"
+      ></path>
+    </svg>
+  </ng-container>
 </ng-template>
 
 <ng-template #iconText>
-	<div class="wrapper-icon-text">
-		<div class="wrapper-svg" *ngIf="viewButton === 'ICON_TEXT'">
-			<div style="display: flex; align-items: center" *ngIf="!isLoaded; else loading">
-				<svg class="roundedLogo" width="24" height="24" viewBox="0 0 24 24" fill="none">
-					<path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
-						d="M0.75 11.9125C0.75 5.6422 5.66254 1 12 1C18.3375 1 23.25 5.6422 23.25 11.9125C23.25 18.1828 18.3375 22.825 12 22.825C10.8617 22.825 9.76958 22.6746 8.74346 22.3925C8.544 22.3376 8.33188 22.3532 8.1426 22.4368L5.90964 23.4224C5.32554 23.6803 4.66618 23.2648 4.64661 22.6267L4.58535 20.6253C4.57781 20.3789 4.46689 20.1483 4.28312 19.9839C2.09415 18.0264 0.75 15.1923 0.75 11.9125ZM8.54913 9.86084L5.24444 15.1038C4.92731 15.6069 5.54578 16.1739 6.01957 15.8144L9.56934 13.1204C9.80947 12.9381 10.1413 12.9371 10.3824 13.118L13.0109 15.0893C13.7996 15.6809 14.9252 15.4732 15.451 14.6392L18.7556 9.39616C19.0727 8.893 18.4543 8.326 17.9805 8.68555L14.4307 11.3796C14.1906 11.5618 13.8587 11.5628 13.6176 11.3819L10.9892 9.41061C10.2005 8.81909 9.07479 9.02676 8.54913 9.86084Z"
-						fill="white"
-					></path>
-				</svg>
+  <div class="wrapper-icon-text">
+    <div class="wrapper-svg" *ngIf="viewButton === 'ICON_TEXT'">
+      <div
+        style="display: flex; align-items: center"
+        *ngIf="!isLoaded; else loading"
+      >
+        <svg
+          class="roundedLogo"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0.75 11.9125C0.75 5.6422 5.66254 1 12 1C18.3375 1 23.25 5.6422 23.25 11.9125C23.25 18.1828 18.3375 22.825 12 22.825C10.8617 22.825 9.76958 22.6746 8.74346 22.3925C8.544 22.3376 8.33188 22.3532 8.1426 22.4368L5.90964 23.4224C5.32554 23.6803 4.66618 23.2648 4.64661 22.6267L4.58535 20.6253C4.57781 20.3789 4.46689 20.1483 4.28312 19.9839C2.09415 18.0264 0.75 15.1923 0.75 11.9125ZM8.54913 9.86084L5.24444 15.1038C4.92731 15.6069 5.54578 16.1739 6.01957 15.8144L9.56934 13.1204C9.80947 12.9381 10.1413 12.9371 10.3824 13.118L13.0109 15.0893C13.7996 15.6809 14.9252 15.4732 15.451 14.6392L18.7556 9.39616C19.0727 8.893 18.4543 8.326 17.9805 8.68555L14.4307 11.3796C14.1906 11.5618 13.8587 11.5628 13.6176 11.3819L10.9892 9.41061C10.2005 8.81909 9.07479 9.02676 8.54913 9.86084Z"
+            fill="white"
+          ></path>
+        </svg>
 
-				<svg class="rounded" width="24" height="24" viewBox="0 0 24 24" fill="none">
-					<path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
-						d="M23 11.5037C22.9991 17.6066 18.393 22.0743 11.9998 22.0743C10.9345 22.0743 9.91972 21.9794 8.96771 21.7469C8.17611 21.5538 7.34969 21.5736 6.57781 21.8368L2.90954 22.9625C2.31871 23.1643 1.7453 22.5902 1.9456 21.9766L2.67394 19.566C2.94666 18.7301 2.84078 17.8129 2.38288 17.066C1.4139 15.4844 1.00046 13.5951 1 11.5037V11.5028V11.5018C1.00092 5.39938 5.607 1.00366 11.9998 1.00366C18.393 1.00366 22.9991 5.39938 23 11.5018V11.5028V11.5037Z"
-						fill="white"
-					></path>
-				</svg>
-				<svg class="squared" width="24" height="24" viewBox="0 0 24 24" fill="none">
-					<path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
-						d="M1 6C1 3.79086 2.79086 2 5 2H19C21.2091 2 23 3.79086 23 6V16C23 18.2091 21.2091 20 19 20H13.6569C12.596 20 11.5786 20.4214 10.8284 21.1716L8.41421 23.5858C8.149 23.851 7.78929 24 7.41421 24C6.63316 24 6 23.3668 6 22.5858V21C6 20.4477 5.55229 20 5 20C2.79086 20 1 18.2091 1 16V6Z"
-						fill="white"
-					></path>
-				</svg>
-			</div>
-		</div>
-		<ng-container *ngIf="viewButton === 'TEXT' && isLoaded; then loading; else text">
-		</ng-container>
-	</div>
+        <svg
+          class="rounded"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M23 11.5037C22.9991 17.6066 18.393 22.0743 11.9998 22.0743C10.9345 22.0743 9.91972 21.9794 8.96771 21.7469C8.17611 21.5538 7.34969 21.5736 6.57781 21.8368L2.90954 22.9625C2.31871 23.1643 1.7453 22.5902 1.9456 21.9766L2.67394 19.566C2.94666 18.7301 2.84078 17.8129 2.38288 17.066C1.4139 15.4844 1.00046 13.5951 1 11.5037V11.5028V11.5018C1.00092 5.39938 5.607 1.00366 11.9998 1.00366C18.393 1.00366 22.9991 5.39938 23 11.5018V11.5028V11.5037Z"
+            fill="white"
+          ></path>
+        </svg>
+        <svg
+          class="squared"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M1 6C1 3.79086 2.79086 2 5 2H19C21.2091 2 23 3.79086 23 6V16C23 18.2091 21.2091 20 19 20H13.6569C12.596 20 11.5786 20.4214 10.8284 21.1716L8.41421 23.5858C8.149 23.851 7.78929 24 7.41421 24C6.63316 24 6 23.3668 6 22.5858V21C6 20.4477 5.55229 20 5 20C2.79086 20 1 18.2091 1 16V6Z"
+            fill="white"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <ng-container
+      *ngIf="viewButton === 'TEXT' && isLoaded; then loading; else text"
+    >
+    </ng-container>
+  </div>
 </ng-template>
 
 <ng-template #text>
-	<span class="ngx-facebook-messenger-text">
-		{{ textButton }}
-	</span>
+  <span class="ngx-facebook-messenger-text">
+    {{ textButton }}
+  </span>
 </ng-template>

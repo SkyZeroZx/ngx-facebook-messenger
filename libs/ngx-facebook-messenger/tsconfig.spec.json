@@ -12,7 +12,6 @@
     "src/**/*.test.ts",
     "src/**/*.spec.ts",
     "src/**/*.d.ts",
-    "src/lib/types/facebook.d.ts",
     "src/lib/types/*.d.ts"
   ]
 }
