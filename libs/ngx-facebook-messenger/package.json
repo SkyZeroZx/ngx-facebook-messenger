@@ -1,7 +1,7 @@
 {
   "name": "ngx-facebook-messenger",
   "description": "A Angular 2+ Facebook Messenger Plugin. Angular Universal Friendly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
