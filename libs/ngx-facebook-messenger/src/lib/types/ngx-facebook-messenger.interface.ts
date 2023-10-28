@@ -11,6 +11,11 @@ export interface NgxFacebookMessengerOptions {
    */
   page_id: string;
   /**
+   * Optional option for defined language support by facebook plugin (review your language in documentation)
+   * @default 'en_US'
+   */
+  language?: string;
+  /**
    *  Init Plugin Options
    */
   initPluginOptions?: {
@@ -25,6 +30,16 @@ export interface NgxFacebookMessengerOptions {
      * @default 600
      */
     debounceTime?: number;
+    /**
+     * When the user is logged with your account show a greeting text in the Facebook Plugin Messenger
+     * @default 'Hello, how can we help you?'
+     */
+    logged_in_greeting?: string;
+    /**
+     * When the user not logged with your account show a greeting text in the Facebook Plugin Messenger
+     * @default 'Hello, how can we help you?'
+     */
+    logged_out_greeting?: string;
   };
   /**
    * Button Options for customization similar to a Facebook Plugin Official

@@ -16,6 +16,7 @@ import {
 
 import {
   CUSTOMER_CHAT,
+  DEFAULT_GREETING,
   SIZE_BUTTON_DESKTOP,
   SIZE_BUTTON_MOBILE,
   STYLE_BUTTON,
@@ -249,6 +250,7 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    * The function injects the Facebook SDK asynchronously into the document.
    */
   private injectFbSdkAsync(): void {
+    const language = this.ngxFacebookMessengerOptions?.language ?? 'en_US';
     const fjs = this.document.getElementsByTagName('script')[0];
     if (this.document.getElementById('facebook-jssdk')) return;
     const js = this.document.createElement('script');
@@ -256,7 +258,7 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
     js.async = false;
     js.defer = false;
     js.crossOrigin = 'anonymous';
-    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+    js.src = `https://connect.facebook.net/${language}/sdk/xfbml.customerchat.js`;
     fjs?.parentNode?.insertBefore(js, fjs);
   }
 
@@ -277,9 +279,23 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
       'page_id',
       this.ngxFacebookMessengerOptions.page_id
     );
+
     fbCustomerChat.setAttribute('attribution', 'biz_inbox');
 
+    fbCustomerChat.setAttribute(
+      'logged_in_greeting',
+      this.ngxFacebookMessengerOptions?.initPluginOptions?.logged_in_greeting ||
+        DEFAULT_GREETING
+    );
+
+    fbCustomerChat.setAttribute(
+      'logged_out_greeting',
+      this.ngxFacebookMessengerOptions?.initPluginOptions
+        ?.logged_out_greeting || DEFAULT_GREETING
+    );
+
     bodyElement.appendChild(fbRootElement);
+
     bodyElement.appendChild(fbCustomerChat);
   }
 

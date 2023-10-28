@@ -27,3 +27,6 @@ export enum SIZE_BUTTON_DESKTOP {
 	STANDARD = 'STANDARD_DESKTOP',
 	COMPACT = 'COMPACT_DESKTOP'
 }
+
+
+export const DEFAULT_GREETING = 'Hello, how can we help you?';
