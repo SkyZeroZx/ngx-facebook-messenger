@@ -30,6 +30,12 @@
           */
           page_id: string;
           /**
+          * Optional option for defined language support by facebook  
+          * (review your language in documentation)
+          * @default 'en_US'
+          */
+          language?: string;
+          /**
           *  Init Plugin Options
           */
           initPluginOptions?: &#123;
@@ -44,6 +50,18 @@
             * @default 600
             */
             debounceTime?: number;
+            /**
+            * When the user is logged with your account show 
+            * a greeting text in the Facebook Plugin Messenger
+            * @default 'Hello, how can we help you?'
+            */
+            logged_in_greeting?: string;
+            /**
+            * When the user not logged with your account show
+            * a greeting text in the Facebook Plugin Messenger
+            * @default 'Hello, how can we help you?'
+            */
+            logged_out_greeting?: string;
           &#125;;
           /**
           * Button Options for customization
@@ -108,7 +126,9 @@
           <td class="px-4 py-2">customerChatLoad</td>
           <td class="px-4 py-2">
             Emitted when the customer Load , At this point, the plugin is not
-            necessarily mounted in the DOM( Oficial PLugin Facebook )
+            necessarily mounted in the DOM( Oficial PLugin Facebook ) , This
+            output is replace for own implementation of mutation observer detect
+            the Chat Plugin is load and mounted in the DOM 
           </td>
         </tr>
         <tr>

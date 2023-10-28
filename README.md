@@ -2,13 +2,18 @@
 
 Angular component for Facebook Messenger Plugin
 
-Motivation
-
+Ngx Facebook Messenger offers a lightweight alternative, optimizing user experiences by significantly reducing the initial load size, ensuring smoother page performance, and enhancing overall website efficiency
+ 
 Currently Facebook Messenger Plugin **killed** the core web vitals when load
 
-Aprroach
+ 
+**Before** of implementation of plugin
 
-- Create a fake button customizable only load the Messenger Plugin when i need
+![Sample Before](/docs/sample_before.jpg)
+
+**After** 
+
+![Sample After](/docs/sample_after.jpg)
 
 Native for Angular
 
@@ -59,12 +64,7 @@ Example of position left in the plugin with botton 36px , and custom background 
 
 ```scss
 #ngx-facebook-messenger {
-  .wrapper {
-    bottom: 36px;
-    right: 0px;
-    left: 12px;
     background: #8278ff;
-  }
 }
 ```
 
@@ -86,6 +86,8 @@ Example of position left in the plugin with bottom 36px , and custom background
   }
 }
 ```
+
+Note : This SCSS code is valid when applied in style base of all proyect , when applied directly in component use !important  
 
 # API
 
@@ -117,6 +119,11 @@ export interface NgxFacebookMessengerOptions {
    */
   page_id: string;
   /**
+   * Optional option for defined language support by facebook plugin (review your language in documentation)
+   * @default 'en_US'
+   */
+  language?: string;
+  /**
    *  Init Plugin Options
    */
   initPluginOptions?: {
@@ -131,6 +138,16 @@ export interface NgxFacebookMessengerOptions {
      * @default 600
      */
     debounceTime?: number;
+    /**
+     * When the user is logged with your account show a greeting text in the Facebook Plugin Messenger
+     * @default 'Hello, how can we help you?'
+     */
+    logged_in_greeting?: string;
+    /**
+     * When the user not logged with your account show a greeting text in the Facebook Plugin Messenger
+     * @default 'Hello, how can we help you?'
+     */
+    logged_out_greeting?: string;
   };
   /**
    * Button Options for customization similar to a Facebook Plugin Official
@@ -202,7 +219,7 @@ export enum SIZE_BUTTON_DESKTOP {
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | xfbmlRender      | Emitted when xfmblRender in the DOM                                                                                         |
 | customerChatShow | Emitted when the customer Chat Show ( Oficial PLugin Facebook )                                                             |
-| customerChatLoad | Emitted when the customer Load , At this point, the plugin is not necessarily mounted in the DOM( Oficial PLugin Facebook ) |
+| customerChatLoad | Emitted when the customer Load , At this point, the plugin is not necessarily mounted in the DOM( Oficial PLugin Facebook ) , This output is replace for own implementation of mutation observer detect the Chat Plugin is load and mounted in the DOM |
 | customerChatHide | Emitted when the customer chat Hide ( Oficial Plugin Facebook )                                                             |
 | dialogShow       | Emitted when the customer chat show Dialog ( Oficial Plugin Facebook )                                                      |
 | dialogHide       | Emitted when the customer chat hide Dialog ( Oficial Plugin Facebook )                                                      |
