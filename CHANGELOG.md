@@ -1,3 +1,20 @@
+## [1.1.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.0.1...v1.1.0) (2023-10-28)
+
+
+### Features
+
+* Add Greeting Options and Language ([118c53e](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/118c53eecd76df54b47ec37988cf440af2c0881f))
+
+
+### Bug Fixes
+
+* fixed render problem of facebook plugin ([7c695bb](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/7c695bbcdbf2ab39686f2475b28e592e691d1ab9))
+
+
+### Chores
+
+* Update Documentation ([322605d](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/322605db74df87c4b5bc0c717fbab281a188274c))
+
 ## [1.0.1](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.0.0...v1.0.1) (2023-10-26)
 
 
