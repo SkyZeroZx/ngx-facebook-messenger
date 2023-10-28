@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.0.0...v1.0.1) (2023-10-26)
+
+
+### Bug Fixes
+
+* update global FB variable ([d6f271b](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/d6f271b3c588e5cc4b7469abaf8a96c6631bf1c4))
+* update namespace error of fb ([48795b6](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/48795b6a14067e375ab4aafb6964d442cf4ba687))
+
 ## 1.0.0 (2023-09-10)
 
 
