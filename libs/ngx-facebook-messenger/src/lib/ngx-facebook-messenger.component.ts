@@ -23,6 +23,7 @@ import {
 } from './constant';
 import { NgxFacebookMessengerOptions } from './types';
 import { FacebookStatic, InitParams } from './types/facebook.interface';
+import { Observable } from 'rxjs';
 
 // eslint-disable-next-line no-var
 declare var FB: FacebookStatic; // Asign a global variable interface of FacebookStatic
@@ -222,7 +223,8 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
       this.dialogShow.emit();
     });
 
-    FB.Event.subscribe(CUSTOMER_CHAT.LOAD, () => {
+    // use this helper functin because CHAT_LOAD Event Of Facebook not detect when real element attach to the DOM
+    this.observeFacebookElement().subscribe(() => {
       this.customerChatLoad.emit();
       this.hideNgxFacebookMessenger();
     });
@@ -279,5 +281,39 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
 
     bodyElement.appendChild(fbRootElement);
     bodyElement.appendChild(fbCustomerChat);
+  }
+
+  /**
+   * The function observes the Facebook element in the DOM and emits an event when specific conditions
+   * are met is useful for detect when real plugin facebook its load because the Events Facebook SDK not sync with the real DOM.
+   * @returns returns an Observable that emits an HTMLElement
+   */
+  observeFacebookElement(): Observable<HTMLElement> {
+    return new Observable<HTMLElement>((observer) => {
+      const mutationObserver = new MutationObserver((mutationsList) => {
+        mutationsList.forEach((mutation) => {
+          const element = mutation?.target as HTMLElement;
+
+          const isRoot = element?.id.trim() === 'fb-root';
+
+          const containsReset = element.className.trim() === 'fb_reset';
+
+          const previousSibling = (
+            mutation?.previousSibling as HTMLElement
+          )?.classList?.contains('fb_iframe_widget');
+
+          if (isRoot && containsReset && previousSibling) {
+            observer.next(element);
+            observer.complete();
+            mutationObserver.disconnect();
+          }
+        });
+      });
+
+      mutationObserver.observe(this.document, {
+        childList: true,
+        subtree: true,
+      });
+    });
   }
 }
