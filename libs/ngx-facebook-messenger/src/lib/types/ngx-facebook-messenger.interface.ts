@@ -20,6 +20,12 @@ export interface NgxFacebookMessengerOptions {
    */
   initPluginOptions?: {
     /**
+     * Init plugin by default Facebook Messenger Oficial lazy ( when click in the fake button )
+     * when is false init eager ( possible killed your web vitals )
+     * @default true
+     */
+    lazy?: boolean;
+    /**
      * If required showDialog
      * @default true
      */
@@ -30,6 +36,13 @@ export interface NgxFacebookMessengerOptions {
      * @default 600
      */
     debounceTime?: number;
+    /**
+     * Property of attribute for theme_color color in oficial Facebook Plugin Messenger
+     * Default take your configuration setting in Facebook Account
+     * If not it's configure take blue default color
+     * @default null
+     */
+    theme_color?: string;
     /**
      * When the user is logged with your account show a greeting text in the Facebook Plugin Messenger
      * @default 'Hello, how can we help you?'

@@ -5,6 +5,7 @@
   alt="Facebook Messenger Chat"
   (click)="loadPlugin()"
   role="button"
+  *ngIf="isLazy"
 >
   <div class="centered-container">
     <ng-container *ngIf="viewButton === 'ICON_TEXT' || viewButton === 'TEXT'">

@@ -22,8 +22,11 @@ import {
   STYLE_BUTTON,
   VIEW_BUTTON,
 } from './constant';
-import { NgxFacebookMessengerOptions } from './types';
-import { FacebookStatic, InitParams } from './types/facebook.interface';
+import {
+  FacebookStatic,
+  InitParams,
+  NgxFacebookMessengerOptions,
+} from './types';
 import { Observable } from 'rxjs';
 
 // eslint-disable-next-line no-var
@@ -75,6 +78,9 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
 
   protected classButton = '';
 
+  // flag for detect if load lazy or not the oficial plugin
+  protected isLazy!: boolean;
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     @Inject(DOCUMENT) private readonly document: Document,
@@ -114,6 +120,19 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
     this.validateRequired();
     this.buildTextButton();
     this.buildClassButton();
+    this.eagerLoadPlugin();
+  }
+
+  /**
+   * Checks if the plugin should be loaded lazily and if not, it loads the
+   * plugin and hides the NgxFacebookMessenger.
+   */
+  private eagerLoadPlugin() {
+    this.isLazy =
+      this.ngxFacebookMessengerOptions.initPluginOptions?.lazy ?? true;
+    if (!this.isLazy) {
+      this.initPlugin();
+    }
   }
 
   private validateRequired() {
@@ -133,6 +152,7 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
   loadPlugin() {
     if (!this.isLoaded && isPlatformBrowser(this.platformId)) {
       this.isLoaded = true;
+      this.addLoader();
       this.initPlugin();
     }
   }
@@ -180,11 +200,17 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    * for the plugin, injecting the Facebook SDK asynchronously, and initializing the Facebook SDK.
    */
   private initPlugin() {
-    this.elementRef = this.ngxFacebookMessenger.nativeElement as HTMLElement;
-    this.elementRef.classList.add('active');
     this.createDivPlugin();
     this.injectFbSdkAsync();
     this.fbAsyncInit();
+  }
+
+  /**
+   * Add the 'active' class to the ngxFacebookMessenger element to show loading action
+   */
+  private addLoader() {
+    this.elementRef = this.ngxFacebookMessenger.nativeElement as HTMLElement;
+    this.elementRef.classList.add('active');
   }
 
   /**
@@ -232,18 +258,26 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
   }
 
   hideNgxFacebookMessenger() {
-    const debounceTime =
-      this.ngxFacebookMessengerOptions?.initPluginOptions?.debounceTime ?? 600;
+    // only hide when is lazy , not show when is eager load plugin oficial facebook
+    if (this.isLazy) {
+      const debounceTime =
+        this.ngxFacebookMessengerOptions?.initPluginOptions?.debounceTime ??
+        600;
 
-    setTimeout(() => {
-      this.renderer2.setStyle(this.elementRef, 'display', 'none');
+      setTimeout(() => {
+        this.setDisplayNone();
+        // Default is true
+        const showDialog =
+          this.ngxFacebookMessengerOptions.initPluginOptions?.showDialog ??
+          true;
 
-      // Default is true
-      const showDialog =
-        this.ngxFacebookMessengerOptions.initPluginOptions?.showDialog || true;
+        this.pluginChatShow(showDialog);
+      }, debounceTime);
+    }
+  }
 
-      this.pluginChatShow(showDialog);
-    }, debounceTime);
+  private setDisplayNone() {
+    this.renderer2.setStyle(this.elementRef, 'display', 'none');
   }
 
   /**
@@ -275,6 +309,10 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
     const fbCustomerChat = this.document.createElement('div');
     fbCustomerChat.id = 'fb-customer-chat';
     fbCustomerChat.classList.add('fb-customerchat');
+
+    // Configure attribute in HTML
+    // See https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/customization
+
     fbCustomerChat.setAttribute(
       'page_id',
       this.ngxFacebookMessengerOptions.page_id
@@ -282,16 +320,20 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
 
     fbCustomerChat.setAttribute('attribution', 'biz_inbox');
 
+    const pluginOptions = this.ngxFacebookMessengerOptions?.initPluginOptions;
+
     fbCustomerChat.setAttribute(
       'logged_in_greeting',
-      this.ngxFacebookMessengerOptions?.initPluginOptions?.logged_in_greeting ||
-        DEFAULT_GREETING
+      pluginOptions?.logged_in_greeting || DEFAULT_GREETING
     );
+
+    if (pluginOptions?.theme_color) {
+      fbCustomerChat.setAttribute('theme_color', pluginOptions?.theme_color);
+    }
 
     fbCustomerChat.setAttribute(
       'logged_out_greeting',
-      this.ngxFacebookMessengerOptions?.initPluginOptions
-        ?.logged_out_greeting || DEFAULT_GREETING
+      pluginOptions?.logged_out_greeting || DEFAULT_GREETING
     );
 
     bodyElement.appendChild(fbRootElement);
