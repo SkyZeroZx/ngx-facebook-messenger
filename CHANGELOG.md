@@ -1,3 +1,17 @@
+## [1.2.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.1.0...v1.2.0) (2023-10-30)
+
+
+### Features
+
+* Add lazy and theme_color how configurable parameters ([dbcf293](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/dbcf2932e21b25c7f0256df488eb9ea286715247))
+
+
+### Chores
+
+* Update documentation ([87df70f](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/87df70fa97a125712109d50b603c5e3734580322))
+* update package.lock.json ([92fd2e9](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/92fd2e97f8ac574f213e6a9d3ac327302608c089))
+* Update release.yml ([f290bf6](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/f290bf6689e23c3bcaa694eacb10568c6243a7d5))
+
 ## [1.1.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.0.1...v1.1.0) (2023-10-28)
 
 
