@@ -3,15 +3,14 @@
 Angular component for Facebook Messenger Plugin
 
 Ngx Facebook Messenger offers a lightweight alternative, optimizing user experiences by significantly reducing the initial load size, ensuring smoother page performance, and enhancing overall website efficiency
- 
+
 Currently Facebook Messenger Plugin **killed** the core web vitals when load
 
- 
 **Before** of implementation of plugin
 
 ![Sample Before](/docs/sample_before.jpg)
 
-**After** 
+**After**
 
 ![Sample After](/docs/sample_after.jpg)
 
@@ -64,7 +63,7 @@ Example of position left in the plugin with botton 36px , and custom background 
 
 ```scss
 #ngx-facebook-messenger {
-    background: #8278ff;
+  background: #8278ff;
 }
 ```
 
@@ -87,7 +86,7 @@ Example of position left in the plugin with bottom 36px , and custom background
 }
 ```
 
-Note : This SCSS code is valid when applied in style base of all proyect , when applied directly in component use !important  
+Note : This SCSS code is valid when applied in style base of all proyect , when applied directly in component use !important
 
 # API
 
@@ -128,6 +127,12 @@ export interface NgxFacebookMessengerOptions {
    */
   initPluginOptions?: {
     /**
+     * Init plugin by default Facebook Messenger Oficial lazy ( when click in the fake button )
+     * when is false init eager ( killed your web vitals )
+     * @default true
+     */
+    lazy?: boolean;
+    /**
      * If required showDialog
      * @default true
      */
@@ -138,6 +143,13 @@ export interface NgxFacebookMessengerOptions {
      * @default 600
      */
     debounceTime?: number;
+    /**
+     * Property of attribute for theme_color color in oficial Facebook Plugin Messenger
+     * Default take your configuration setting in Facebook Account
+     * If not it's configure take blue default color
+     * @default null
+     */
+    theme_color?: string;
     /**
      * When the user is logged with your account show a greeting text in the Facebook Plugin Messenger
      * @default 'Hello, how can we help you?'
@@ -215,14 +227,14 @@ export enum SIZE_BUTTON_DESKTOP {
 
 # Outputs
 
-| Output           | Description                                                                                                                 |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| xfbmlRender      | Emitted when xfmblRender in the DOM                                                                                         |
-| customerChatShow | Emitted when the customer Chat Show ( Oficial PLugin Facebook )                                                             |
+| Output           | Description                                                                                                                                                                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| xfbmlRender      | Emitted when xfmblRender in the DOM                                                                                                                                                                                                                    |
+| customerChatShow | Emitted when the customer Chat Show ( Oficial PLugin Facebook )                                                                                                                                                                                        |
 | customerChatLoad | Emitted when the customer Load , At this point, the plugin is not necessarily mounted in the DOM( Oficial PLugin Facebook ) , This output is replace for own implementation of mutation observer detect the Chat Plugin is load and mounted in the DOM |
-| customerChatHide | Emitted when the customer chat Hide ( Oficial Plugin Facebook )                                                             |
-| dialogShow       | Emitted when the customer chat show Dialog ( Oficial Plugin Facebook )                                                      |
-| dialogHide       | Emitted when the customer chat hide Dialog ( Oficial Plugin Facebook )                                                      |
+| customerChatHide | Emitted when the customer chat Hide ( Oficial Plugin Facebook )                                                                                                                                                                                        |
+| dialogShow       | Emitted when the customer chat show Dialog ( Oficial Plugin Facebook )                                                                                                                                                                                 |
+| dialogHide       | Emitted when the customer chat hide Dialog ( Oficial Plugin Facebook )                                                                                                                                                                                 |
 
 # Methods
 
