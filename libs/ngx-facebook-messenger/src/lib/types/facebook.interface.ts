@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // // Type definitions for the Facebook Javascript SDK 3.3
 // // Project: https://developers.facebook.com/docs/javascript
 // // Definitions by:  Amrit Kahlon    <https://github.com/amritk>
