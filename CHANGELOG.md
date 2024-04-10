@@ -1,3 +1,20 @@
+## [1.3.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.2.0...v1.3.0) (2024-04-10)
+
+
+### Features
+
+* Upgrade to new Control flow Angular ([7a4974d](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/7a4974de9212441a01719dea48a05076161382ff))
+
+
+### Chores
+
+* set node 20 in release ([62553e9](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/62553e97b4fb8c500293f4442f9e82e0df400dfd))
+* sync package.lock.json with node 20 ([49daf14](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/49daf143e4892c009306dce5125c17c778dd05d1))
+* update dependencies to Angular 17 ([cf46024](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/cf46024a38dda480f2e4f231a02414164a60b2e7))
+* Update GitHub Action Release ([1316739](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/1316739a182ea6f66678a6fd775db4eecd32d139))
+* Update project.json demo ([834ba1a](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/834ba1a053caaf06f444d5c520bd6901e8d278ef))
+* update script to deploy ([b0e87e7](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/b0e87e72eaa2348e35b0240c1644778f659ca07e))
+
 ## [1.2.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.1.0...v1.2.0) (2023-10-30)
 
 
