@@ -10,7 +10,7 @@
     "build:affected": "nx affected -t build",
     "build": "nx run-many -t build",
     "lint": "nx run-many -t lint",
-    "deploy:demo": "nx deploy --project=demo-ngx-facebook-messenger --target=prod --base-href=https://skyzerozx.github.io/ngx-facebook-messenger/",
+    "deploy:demo": "nx run demo-ngx-facebook-messenger:deploy --baseHref=https://skyzerozx.github.io/ngx-facebook-messenger/ ",
     "release": "VERSION=$VERSION npm run update-versions && npm run build && nx run-many -t publish",
     "bump-version:root": "rjp package.json version $VERSION"
   },
