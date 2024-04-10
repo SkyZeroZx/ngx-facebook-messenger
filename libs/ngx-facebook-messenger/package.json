@@ -19,7 +19,9 @@
     "FB Messenger",
     "FB Messenger Customer Chat",
     "Angular Universal Friendly",
+    "Angular SSR Friendly",
     "Angular 16",
+    "Angular 17",
     "angular library Facebook Messenger",
     "Angular fb customer chat"
   ],
@@ -27,8 +29,8 @@
     "name": "Jaime Burgos Tejada"
   },
   "peerDependencies": {
-    "@angular/common": ">=16.0.0",
-    "@angular/core": ">=16.0.0"
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

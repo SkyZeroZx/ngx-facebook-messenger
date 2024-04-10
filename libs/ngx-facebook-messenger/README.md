@@ -30,6 +30,15 @@ Set your _page_id_ in ngxFacebookMessengerOptions how the next example
 <ngx-facebook-messenger [fbInitParams]="{ xfbml: true, version: 'v17.0' }" [ngxFacebookMessengerOptions]="{ page_id: 'YOUR_PAGE_ID'}"> </ngx-facebook-messenger>
 ```
 
+## Dependencies
+
+Latest version available for each version of Angular
+
+| ngx-facebook-messenger | Angular     |
+| ---------------------- | ----------- |
+| 1.0.0 - 1.2.0          | 16.xx 17.xx |
+| 1.3.0                  | 17.x        |
+
 # Usage
 
 ## Install
