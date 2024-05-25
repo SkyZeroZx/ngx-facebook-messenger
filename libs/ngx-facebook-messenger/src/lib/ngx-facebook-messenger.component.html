@@ -1,18 +1,18 @@
-@if (isLazy) {
+@if (isLazy()) {
   <div
     #ngxFacebookMessenger
-    [class]="classButton"
+    [class]="classButton()"
     id="ngx-facebook-messenger"
     alt="Facebook Messenger Chat"
     (click)="loadPlugin()"
     role="button"
   >
     <div class="centered-container">
-      @if (viewButton === 'ICON_TEXT' || viewButton === 'TEXT') {
+      @if (viewButton() === 'ICON_TEXT' || viewButton() === 'TEXT') {
         <ng-container *ngTemplateOutlet="iconText" />
       }
 
-      @if (viewButton === 'ICON') {
+      @if (viewButton() === 'ICON') {
         <ng-container *ngTemplateOutlet="icon" />
       }
     </div>
@@ -20,7 +20,7 @@
 }
 
 <ng-template #icon>
-  @if (!isLoaded) {
+  @if (!isLoaded()) {
     <svg class="roundedLogo" width="36" height="36" viewBox="0 0 36 36">
       <path
         fill="white"
@@ -50,9 +50,9 @@
 
 <ng-template #iconText>
   <div class="wrapper-icon-text">
-    @if (viewButton === 'ICON_TEXT') {
+    @if (viewButton() === 'ICON_TEXT') {
       <div class="wrapper-svg">
-        @if (!isLoaded) {
+        @if (!isLoaded()) {
           <div style="display: flex; align-items: center">
             <svg
               class="roundedLogo"
@@ -104,7 +104,7 @@
       </div>
     }
 
-    @if (viewButton === 'TEXT' && isLoaded) {
+    @if (viewButton() === 'TEXT' && isLoaded()) {
       <ng-container *ngTemplateOutlet="loading" />
     } @else {
       <ng-container *ngTemplateOutlet="text" />
@@ -114,7 +114,7 @@
 
 <ng-template #text>
   <span class="ngx-facebook-messenger-text">
-    {{ textButton }}
+    {{ textButton() }}
   </span>
 </ng-template>
 

@@ -2,16 +2,16 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   ElementRef,
-  EventEmitter,
   Inject,
-  Input,
-  OnChanges,
   OnInit,
-  Output,
   PLATFORM_ID,
-  ViewChild,
   ChangeDetectionStrategy,
   Renderer2,
+  input,
+  computed,
+  signal,
+  viewChild,
+  output,
 } from '@angular/core';
 
 import {
@@ -38,88 +38,81 @@ declare var FB: FacebookStatic; // Asign a global variable interface of Facebook
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./ngx-facebook-messenger.component.scss'],
 })
-export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
-  @Input()
-  fbInitParams!: InitParams;
+export class NgxFacebookMessengerComponent implements OnInit {
+  fbInitParams = input.required<InitParams>();
 
-  @Input()
-  ngxFacebookMessengerOptions!: NgxFacebookMessengerOptions;
+  ngxFacebookMessengerOptions = input<NgxFacebookMessengerOptions>();
 
-  @ViewChild('ngxFacebookMessenger')
-  protected ngxFacebookMessenger!: ElementRef;
+  protected ngxFacebookMessenger = viewChild<ElementRef<HTMLElement>>(
+    'ngxFacebookMessenger',
+  );
 
-  @Output()
-  xfbmlRender = new EventEmitter<void>();
+  xfbmlRender = output<void>();
 
-  @Output()
-  customerChatShow = new EventEmitter<void>();
+  customerChatShow = output<void>();
 
-  @Output()
-  customerChatLoad = new EventEmitter<void>();
+  customerChatLoad = output<void>();
 
-  @Output()
-  customerChatHide = new EventEmitter<void>();
+  customerChatHide = output<void>();
 
-  @Output()
-  dialogShow = new EventEmitter<void>();
+  dialogShow = output<void>();
 
-  @Output()
-  dialogHide = new EventEmitter<void>();
+  dialogHide = output<void>();
 
   private elementRef!: HTMLElement;
 
   // flag for only load plugin once time
-  protected isLoaded = false;
-  protected textButton = '';
-  protected desktopSize = '';
-  protected mobileSize = '';
-  protected styleButton = '';
-  protected viewButton = '';
+  protected isLoaded = signal(false);
 
-  protected classButton = '';
+  protected desktopSize = computed(() => {
+    const size = this.ngxFacebookMessengerOptions()?.buttonOptions?.size;
+    return size?.desktop || SIZE_BUTTON_DESKTOP.STANDARD;
+  });
 
-  // flag for detect if load lazy or not the oficial plugin
-  protected isLazy!: boolean;
+  protected mobileSize = computed(() => {
+    const size = this.ngxFacebookMessengerOptions()?.buttonOptions?.size;
+    return size?.mobile || SIZE_BUTTON_MOBILE.COMPACT;
+  });
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
-    @Inject(DOCUMENT) private readonly document: Document,
-    private readonly renderer2: Renderer2
-  ) {}
+  protected styleButton = computed(() => {
+    const style = this.ngxFacebookMessengerOptions()?.buttonOptions?.style;
+    return style || STYLE_BUTTON.ROUNDED_LOGO;
+  });
 
-  private buildTextButton() {
-    this.textButton =
-      this.ngxFacebookMessengerOptions?.buttonOptions?.text || 'Chat';
-  }
+  protected viewButton = computed(() => {
+    const view = this.ngxFacebookMessengerOptions()?.buttonOptions?.view;
+    return view || VIEW_BUTTON.ICON;
+  });
 
-  private buildClassButton() {
-    const size = this.ngxFacebookMessengerOptions?.buttonOptions?.size;
-    const view = this.ngxFacebookMessengerOptions?.buttonOptions?.view;
-    const style = this.ngxFacebookMessengerOptions?.buttonOptions?.style;
+  protected textButton = computed(
+    () => this.ngxFacebookMessengerOptions()?.buttonOptions?.text || 'Chat',
+  );
 
-    this.desktopSize = size?.desktop || SIZE_BUTTON_DESKTOP.STANDARD;
-    this.mobileSize = size?.mobile || SIZE_BUTTON_MOBILE.COMPACT;
-    this.styleButton = style || STYLE_BUTTON.ROUNDED_LOGO;
-    this.viewButton = view || VIEW_BUTTON.ICON;
-
+  protected classButton = computed(() => {
     const classes = [
       'wrapper',
       'ngx-facebook-messeger-size',
-      this.desktopSize,
-      this.mobileSize,
-      this.styleButton,
-      this.viewButton,
+      this.desktopSize(),
+      this.mobileSize(),
+      this.styleButton(),
+      this.viewButton(),
     ]
       .filter((className) => className !== '')
       .join(' ');
 
-    this.classButton = classes;
-  }
+    return classes;
+  });
+
+  // flag for detect if load lazy or not the oficial plugin
+  protected isLazy = signal<boolean>(true);
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly renderer2: Renderer2,
+  ) {}
 
   ngOnInit(): void {
-    this.validateRequired();
-    this.buildTextButton();
-    this.buildClassButton();
     this.eagerLoadPlugin();
   }
 
@@ -128,30 +121,17 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    * plugin and hides the NgxFacebookMessenger.
    */
   private eagerLoadPlugin() {
-    this.isLazy =
-      this.ngxFacebookMessengerOptions.initPluginOptions?.lazy ?? true;
-    if (!this.isLazy) {
+    this.isLazy.set(
+      this.ngxFacebookMessengerOptions()?.initPluginOptions?.lazy ?? true,
+    );
+    if (!this.isLazy()) {
       this.initPlugin();
     }
   }
 
-  private validateRequired() {
-    if (!this.ngxFacebookMessengerOptions.page_id) {
-      throw new Error('page_id should have a valid value');
-    }
-    if (!this.fbInitParams?.version) {
-      throw new Error('Required a version of plugin');
-    }
-  }
-
-  ngOnChanges() {
-    this.buildTextButton();
-    this.buildClassButton();
-  }
-
   loadPlugin() {
-    if (!this.isLoaded && isPlatformBrowser(this.platformId)) {
-      this.isLoaded = true;
+    if (!this.isLoaded() && isPlatformBrowser(this.platformId)) {
+      this.isLoaded.set(true);
       this.addLoader();
       this.initPlugin();
     }
@@ -209,7 +189,7 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    * Add the 'active' class to the ngxFacebookMessenger element to show loading action
    */
   private addLoader() {
-    this.elementRef = this.ngxFacebookMessenger.nativeElement as HTMLElement;
+    this.elementRef = this.ngxFacebookMessenger()?.nativeElement as HTMLElement;
     this.elementRef.classList.add('active');
   }
 
@@ -219,8 +199,8 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    */
   private fbAsyncInit() {
     (window as any)['fbAsyncInit'] = () => {
-      const xfbml = this.fbInitParams.xfbml || true;
-      const initParams = { ...this.fbInitParams, xfbml };
+      const xfbml = this.fbInitParams().xfbml ?? true;
+      const initParams = { ...this.fbInitParams(), xfbml };
       FB.init(initParams);
       this.fbEventSubscribe();
     };
@@ -259,16 +239,16 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
 
   hideNgxFacebookMessenger() {
     // only hide when is lazy , not show when is eager load plugin oficial facebook
-    if (this.isLazy) {
+    if (this.isLazy()) {
       const debounceTime =
-        this.ngxFacebookMessengerOptions?.initPluginOptions?.debounceTime ??
+        this.ngxFacebookMessengerOptions()?.initPluginOptions?.debounceTime ??
         600;
 
       setTimeout(() => {
         this.setDisplayNone();
         // Default is true
         const showDialog =
-          this.ngxFacebookMessengerOptions.initPluginOptions?.showDialog ??
+          this.ngxFacebookMessengerOptions()?.initPluginOptions?.showDialog ??
           true;
 
         this.pluginChatShow(showDialog);
@@ -284,7 +264,7 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
    * The function injects the Facebook SDK asynchronously into the document.
    */
   private injectFbSdkAsync(): void {
-    const language = this.ngxFacebookMessengerOptions?.language ?? 'en_US';
+    const language = this.ngxFacebookMessengerOptions()?.language ?? 'en_US';
     const fjs = this.document.getElementsByTagName('script')[0];
     if (this.document.getElementById('facebook-jssdk')) return;
     const js = this.document.createElement('script');
@@ -315,16 +295,16 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
 
     fbCustomerChat.setAttribute(
       'page_id',
-      this.ngxFacebookMessengerOptions.page_id
+      this.ngxFacebookMessengerOptions()?.page_id || '',
     );
 
     fbCustomerChat.setAttribute('attribution', 'biz_inbox');
 
-    const pluginOptions = this.ngxFacebookMessengerOptions?.initPluginOptions;
+    const pluginOptions = this.ngxFacebookMessengerOptions()?.initPluginOptions;
 
     fbCustomerChat.setAttribute(
       'logged_in_greeting',
-      pluginOptions?.logged_in_greeting || DEFAULT_GREETING
+      pluginOptions?.logged_in_greeting || DEFAULT_GREETING,
     );
 
     if (pluginOptions?.theme_color) {
@@ -333,7 +313,7 @@ export class NgxFacebookMessengerComponent implements OnInit, OnChanges {
 
     fbCustomerChat.setAttribute(
       'logged_out_greeting',
-      pluginOptions?.logged_out_greeting || DEFAULT_GREETING
+      pluginOptions?.logged_out_greeting || DEFAULT_GREETING,
     );
 
     bodyElement.appendChild(fbRootElement);
