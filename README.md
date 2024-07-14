@@ -23,7 +23,7 @@ Init your plugin with previous register your page domain in the white list of Fa
 Set your _page_id_ in ngxFacebookMessengerOptions how the next example
 
 ```html
-<ngx-facebook-messenger [ngxFacebookMessengerOptions]="{ page_id: 'YOUR_PAGE_ID'}"> </ngx-facebook-messenger>
+<ngx-facebook-messenger [ngxFacebookMessengerOptions]="{ idMe: 'YOUR_ID_ME_LINK'}"> </ngx-facebook-messenger>
 ```
 
 ## Dependencies
@@ -199,7 +199,7 @@ This method should be after init the plugin or throw a error , except **hideNgxF
 
 | Method                                    | Description                                                                                                                                                                                                                                                                                                                            |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |        
-| pluginChatHide()                          | Call this function to hide the plugin Chat.                                                                                                                                                                   
+| hidePluginChat()                          | Call this function to hide the plugin Chat.                                                                                                                                                                   
 | showPluginChat()                          | Call this function to show the plugin Chat.    
 Note :
 The documentation of Link Me Facebook Messenger
