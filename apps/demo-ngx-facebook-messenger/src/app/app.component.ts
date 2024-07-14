@@ -22,14 +22,9 @@ export class AppComponent {
   listEvents: string[] = [];
 
   options: NgxFacebookMessengerOptions = {
-    page_id: '138655492654061',
-    initPluginOptions: {
-      showDialog: true,
-      debounceTime: 500,
-    },
+    idMe : '110145950848846',
     buttonOptions: {
       text: this.inputText,
-
       view: VIEW_BUTTON.ICON,
       style: STYLE_BUTTON.ROUNDED_LOGO,
       size: {
@@ -168,21 +163,5 @@ export class AppComponent {
         style: STYLE_BUTTON.SQUARED,
       },
     };
-  }
-
-  pluginChatShow() {
-    this.ngxFacebookMessengerComponent.pluginChatShow(false);
-  }
-
-  pluginChatHide() {
-    this.ngxFacebookMessengerComponent.pluginChatHide();
-  }
-
-  pluginDialogShow() {
-    this.ngxFacebookMessengerComponent.pluginChatShowDialog();
-  }
-
-  pluginDialogHide() {
-    this.ngxFacebookMessengerComponent.pluginChatHideDialog();
   }
 }

@@ -13,14 +13,8 @@
   </div>
 </main>
 <ngx-facebook-messenger
-  [fbInitParams]="{ xfbml: true, version: 'v17.0' }"
   [ngxFacebookMessengerOptions]="options"
-  (xfbmlRender)="pushEvent('xfbmlRender')"
-  (customerChatHide)="pushEvent('customerChatHide')"
-  (customerChatLoad)="pushEvent('customerChatLoad')"
-  (customerChatShow)="pushEvent('customerChatShow')"
-  (dialogShow)="pushEvent('dialogShow')"
-  (dialogHide)="pushEvent('dialogHide')"
+  (clicked)="pushEvent('clicked')"
 >
 </ngx-facebook-messenger>
 <ng-template #stylesOptions>
@@ -137,42 +131,6 @@
     <div class="p-3 mt-6 text-gray-700 max-sm:text-lg">
       Configuration <strong>ngxFacebookMessengerOptions</strong>
       <pre class="type-wrap"> {{ options | json }} </pre>
-    </div>
-
-    <div class="flex flex-nowrap space-x-2 justify-center">
-      <div>
-        <button
-          class="px-3 py-2 bg-indigo-500 text-white rounded"
-          (click)="pluginChatShow()"
-        >
-          Chat Show
-        </button>
-      </div>
-      <div>
-        <button
-          class="px-3 py-2 bg-indigo-500 text-white rounded"
-          (click)="pluginDialogShow()"
-        >
-          Dialog Show
-        </button>
-      </div>
-
-      <div>
-        <button
-          class="px-3 py-2 bg-gray-500 text-white rounded"
-          (click)="pluginChatHide()"
-        >
-          Chat Hide
-        </button>
-      </div>
-      <div>
-        <button
-          class="px-3 py-2 bg-gray-500 text-white rounded"
-          (click)="pluginDialogHide()"
-        >
-          Dialog Hide
-        </button>
-      </div>
     </div>
 
     <div class="p-3 mt-6 text-gray-700 max-sm:text-lg">

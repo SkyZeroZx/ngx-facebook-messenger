@@ -28,4 +28,6 @@ export enum SIZE_BUTTON_DESKTOP {
   COMPACT = 'COMPACT_DESKTOP',
 }
 
-export const DEFAULT_GREETING = 'Hello, how can we help you?';
+export const DEFAULT_GREETING = 'Hello';
+
+export const BASE_URL_ME = 'https://m.me/';

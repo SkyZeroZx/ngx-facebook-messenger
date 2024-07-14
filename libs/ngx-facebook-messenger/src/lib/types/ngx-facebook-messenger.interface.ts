@@ -7,53 +7,27 @@ import {
 
 export interface NgxFacebookMessengerOptions {
   /**
-   * Your required page_id for correctly work of real plugin facebook messenger
+   * You need id to use link me to redirect to Messager Chat of Facebook Page
+   * See {@link https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=es_ES}
    */
-  page_id: string;
+  idMe?: string;
   /**
-   * Optional option for defined language support by facebook plugin (review your language in documentation)
-   * @default 'en_US'
+   * Flag to indicate open link when provide propertie idMe
+   * @default true
    */
-  language?: string;
+  openLink?: boolean;
   /**
-   *  Init Plugin Options
+   *  ref parameter that, when a person clicks on the link,
+   *  provides your business with more context about the conversation such as a link on your website versus a link in a store.
+   *  See {@link https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=en_US}
    */
-  initPluginOptions?: {
-    /**
-     * Init plugin by default Facebook Messenger Oficial lazy ( when click in the fake button )
-     * when is false init eager ( possible killed your web vitals )
-     * @default true
-     */
-    lazy?: boolean;
-    /**
-     * If required showDialog
-     * @default true
-     */
-    showDialog?: boolean;
-    /**
-     * Debounce time for hide the ngx facebook messenger
-     * When load real plugin, time in miliseconds
-     * @default 600
-     */
-    debounceTime?: number;
-    /**
-     * Property of attribute for theme_color color in oficial Facebook Plugin Messenger
-     * Default take your configuration setting in Facebook Account
-     * If not it's configure take blue default color
-     * @default null
-     */
-    theme_color?: string;
-    /**
-     * When the user is logged with your account show a greeting text in the Facebook Plugin Messenger
-     * @default 'Hello, how can we help you?'
-     */
-    logged_in_greeting?: string;
-    /**
-     * When the user not logged with your account show a greeting text in the Facebook Plugin Messenger
-     * @default 'Hello, how can we help you?'
-     */
-    logged_out_greeting?: string;
-  };
+  ref?: string;
+  /**
+   * text parameter to include a customized message as well.
+   * See {@link https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=en_US}
+   *  @default "Hello"
+   */
+  text?: string;
   /**
    * Button Options for customization similar to a Facebook Plugin Official
    */

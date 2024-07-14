@@ -4,17 +4,13 @@ Angular component for Facebook Messenger Plugin
 
 Ngx Facebook Messenger offers a lightweight alternative, optimizing user experiences by significantly reducing the initial load size, ensuring smoother page performance, and enhancing overall website efficiency
 
-Currently Facebook Messenger Plugin **killed** the core web vitals when load
+On May 9 , 2024 Facebook remove Facebook Messenger Plugin chat without replacement
 
-**Before** of implementation of plugin
+See https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/
 
-![Sample Before](/docs/sample_before.jpg)
+As an alternative to the change made by Facebook, consider making a change to the library's API to support Link Me for use with Facebook Messenger.
 
-**After**
-
-![Sample After](/docs/sample_after.jpg)
-
-Native for Angular
+See https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=en_US
 
 # DEMO
 
@@ -27,7 +23,7 @@ Init your plugin with previous register your page domain in the white list of Fa
 Set your _page_id_ in ngxFacebookMessengerOptions how the next example
 
 ```html
-<ngx-facebook-messenger [fbInitParams]="{ xfbml: true, version: 'v17.0' }" [ngxFacebookMessengerOptions]="{ page_id: 'YOUR_PAGE_ID'}"> </ngx-facebook-messenger>
+<ngx-facebook-messenger [ngxFacebookMessengerOptions]="{ page_id: 'YOUR_PAGE_ID'}"> </ngx-facebook-messenger>
 ```
 
 ## Dependencies
@@ -37,7 +33,7 @@ Latest version available for each version of Angular
 | ngx-facebook-messenger | Angular     |
 | ---------------------- | ----------- |
 | 1.0.0 - 1.2.0          | 16.xx 17.xx |
-| 1.3.0                  | 17.x        |
+| 1.4.0                  | 17.x 18.xx  |
 
 # Usage
 
@@ -101,75 +97,32 @@ Note : This SCSS code is valid when applied in style base of all proyect , when 
 
 # Inputs
 
-In **fbInitParams**
-
-```typescript
-interface InitParams {
-  appId?: string;
-  version: string;
-  cookie?: boolean;
-  status?: boolean;
-  xfbml?: boolean; // Default value true
-  frictionlessRequests?: boolean;
-  hideFlashCallback?: boolean;
-  autoLogAppEvents?: boolean;
-}
-```
-
-- Credits of Facebook General Interface type for [facebook-js-sdk](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/facebook-js-sdk/index.d.ts)
-
 In **NgxFacebookMessengerOptions**
 
 ```typescript
 export interface NgxFacebookMessengerOptions {
   /**
-   * Your required page_id for correctly work of real plugin facebook messenger
+   * See{@link https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=es_ES}
+   * You need id to use link me to redirect to Messager Chat of Facebook Page
    */
-  page_id: string;
+  idMe?: string;
   /**
-   * Optional option for defined language support by facebook plugin (review your language in documentation)
-   * @default 'en_US'
+   * Flag to indicate open link when provide propertie idMe
+   * @default true
    */
-  language?: string;
+  openLink?: boolean;
   /**
-   *  Init Plugin Options
+   *  ref parameter that, when a person clicks on the link,
+   *  provides your business with more context about the conversation such as a link on your website versus a link in a store.
+   *  See {@link https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=en_US}
    */
-  initPluginOptions?: {
-    /**
-     * Init plugin by default Facebook Messenger Oficial lazy ( when click in the fake button )
-     * when is false init eager ( killed your web vitals )
-     * @default true
-     */
-    lazy?: boolean;
-    /**
-     * If required showDialog
-     * @default true
-     */
-    showDialog?: boolean;
-    /**
-     * Debounce time for hide the ngx facebook messenger
-     * When load real plugin, time in miliseconds
-     * @default 600
-     */
-    debounceTime?: number;
-    /**
-     * Property of attribute for theme_color color in oficial Facebook Plugin Messenger
-     * Default take your configuration setting in Facebook Account
-     * If not it's configure take blue default color
-     * @default null
-     */
-    theme_color?: string;
-    /**
-     * When the user is logged with your account show a greeting text in the Facebook Plugin Messenger
-     * @default 'Hello, how can we help you?'
-     */
-    logged_in_greeting?: string;
-    /**
-     * When the user not logged with your account show a greeting text in the Facebook Plugin Messenger
-     * @default 'Hello, how can we help you?'
-     */
-    logged_out_greeting?: string;
-  };
+  ref?: string;
+  /**
+   * text parameter to include a customized message as well.
+   * See {@link https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=en_US}
+   *  @default "Hello"
+   */
+  text?: string;
   /**
    * Button Options for customization similar to a Facebook Plugin Official
    */
@@ -238,30 +191,20 @@ export enum SIZE_BUTTON_DESKTOP {
 
 | Output           | Description                                                                                                                                                                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| xfbmlRender      | Emitted when xfmblRender in the DOM                                                                                                                                                                                                                    |
-| customerChatShow | Emitted when the customer Chat Show ( Oficial PLugin Facebook )                                                                                                                                                                                        |
-| customerChatLoad | Emitted when the customer Load , At this point, the plugin is not necessarily mounted in the DOM( Oficial PLugin Facebook ) , This output is replace for own implementation of mutation observer detect the Chat Plugin is load and mounted in the DOM |
-| customerChatHide | Emitted when the customer chat Hide ( Oficial Plugin Facebook )                                                                                                                                                                                        |
-| dialogShow       | Emitted when the customer chat show Dialog ( Oficial Plugin Facebook )                                                                                                                                                                                 |
-| dialogHide       | Emitted when the customer chat hide Dialog ( Oficial Plugin Facebook )                                                                                                                                                                                 |
+| clicked      | Emitted when clicked in Facebook Messenger Icon                                                                                                                                                                                                |
 
 # Methods
 
 This method should be after init the plugin or throw a error , except **hideNgxFacebookMessenger**
 
 | Method                                    | Description                                                                                                                                                                                                                                                                                                                            |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pluginChatShow(shouldShowDialog: boolean) | Call this function to show the plugin on your page. You can use the shouldShowDialog parameter to decide if the dialog should also be shown. For the plugin to stay hidden on initial page load, you have to set xfbml as false when initializing the SDK. Then you can call FB.XFBML.parse() to control when Customer Chat is loaded. |
-| pluginChatShowDialog()                    | Call this function to show the plugin dialog.                                                                                                                                                                                                                                                                                          |
-| pluginChatHideDialog()                    | Call this function to hide the plugin dialog.                                                                                                                                                                                                                                                                                          |
-| pluginChatHide()                          | Call this function to hide the plugin Chat.                                                                                                                                                                                                                                                                                            |
-| fbXFBMLParse()                            | This function parses and renders XFBML markup in a document on the fly. This could be used if you send XFBML from your server via ajax and want to render it client side. XFBML enables you to incorporate FBML into your websites and IFrame applications.                                                                            |
-| hideNgxFacebookMessenger()                | This function hide the library with display none with a debounce time if exist in the _options_                                                                                                                                                                                                                                        |
-
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |        
+| pluginChatHide()                          | Call this function to hide the plugin Chat.                                                                                                                                                                   
+| showPluginChat()                          | Call this function to show the plugin Chat.    
 Note :
-The documentation take part of facebook js sdk
+The documentation of Link Me Facebook Messenger
 
-- https://developers.facebook.com/docs/reference/javascript
+- https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=en_US
 
 ## Versioning
 
