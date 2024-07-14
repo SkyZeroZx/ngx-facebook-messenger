@@ -105,7 +105,7 @@ export interface NgxFacebookMessengerOptions {
    * See{@link https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links?locale=es_ES}
    * You need id to use link me to redirect to Messager Chat of Facebook Page
    */
-  idMe?: string;
+  idMe: string;
   /**
    * Flag to indicate open link when provide propertie idMe
    * @default true
