@@ -1,3 +1,17 @@
+## [2.1.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v2.0.0...v2.1.0) (2024-07-14)
+
+
+### Features
+
+* Add validation to required idMe ([1e2e2c1](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/1e2e2c1e650ca5d7bd3494741ae8f36540dbb046))
+
+
+### Chores
+
+* Update idMe documentation to required ([dd7506c](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/dd7506c773322230c42559d4b51cb52caf7fbaf7))
+* Update Readme ([30aa467](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/30aa467e813b46b6e98402f287e0a83759e47ebf))
+* Update Readme ([dc93282](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/dc932820f13305830eb5dba9d60957401c445f3b))
+
 ## [2.0.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.3.0...v2.0.0) (2024-07-14)
 
 
