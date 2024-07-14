@@ -20,7 +20,7 @@ See a [live demo](https://skyzerozx.github.io/ngx-facebook-messenger)
 
 Init your plugin with previous register your page domain in the white list of Facebook
 
-Set your _page_id_ in ngxFacebookMessengerOptions how the next example
+Set your idMe in ngxFacebookMessengerOptions how the next example
 
 ```html
 <ngx-facebook-messenger [ngxFacebookMessengerOptions]="{ idMe: 'YOUR_ID_ME_LINK'}"> </ngx-facebook-messenger>
