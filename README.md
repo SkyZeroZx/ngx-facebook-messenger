@@ -33,7 +33,7 @@ Latest version available for each version of Angular
 | ngx-facebook-messenger | Angular     |
 | ---------------------- | ----------- |
 | 1.0.0 - 1.2.0          | 16.xx 17.xx |
-| 1.4.0                  | 17.x 18.xx  |
+| 1.3.0 - 2.0.0          | 17.xx 18.xx |
 
 # Usage
 
