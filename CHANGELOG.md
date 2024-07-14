@@ -1,3 +1,25 @@
+## [2.0.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.3.0...v2.0.0) (2024-07-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* Change previous Facebook Messenger Plugin deprecated by Facebook to Link Me how alternative
+
+### Features
+
+* Add support Angular 18 ([828fd61](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/828fd618380929248cd9594086b1600487fe2ca5))
+* Change Facebok Messenger Plugin deprecated to Link Me ([8026b46](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/8026b463b560c1028d285c77fc4b76fb609af9c8))
+
+
+### Bug Fixes
+
+* Fixed dependencies to release ([d406b5d](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/d406b5d1c8da205925861d38d3fe5246771218f3))
+
+
+### Chores
+
+* Update documentation ([86c7951](https://github.com/SkyZeroZx/ngx-facebook-messenger/commit/86c7951586e86e819aa3520c81bcb3bce6d7d09a))
+
 ## [1.3.0](https://github.com/SkyZeroZx/ngx-facebook-messenger/compare/v1.2.0...v1.3.0) (2024-04-10)
 
 
