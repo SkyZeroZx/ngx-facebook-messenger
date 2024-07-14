@@ -6,6 +6,7 @@ import {
   ElementRef,
   Inject,
   input,
+  OnInit,
   output,
   PLATFORM_ID,
   Renderer2,
@@ -28,7 +29,7 @@ import { NgxFacebookMessengerOptions } from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./ngx-facebook-messenger.component.scss'],
 })
-export class NgxFacebookMessengerComponent {
+export class NgxFacebookMessengerComponent implements OnInit {
   ngxFacebookMessengerOptions = input<NgxFacebookMessengerOptions>();
 
   clicked = output<void>();
@@ -100,6 +101,12 @@ export class NgxFacebookMessengerComponent {
     private readonly renderer2: Renderer2,
     private readonly elementRef: ElementRef<HTMLElement>,
   ) {}
+
+  ngOnInit(): void {
+    if (!this.idMe()) {
+      throw new Error('Id Me is required to work properly');
+    }
+  }
 
   onClickFacebookButton() {
     if (this.isBrowser) {
